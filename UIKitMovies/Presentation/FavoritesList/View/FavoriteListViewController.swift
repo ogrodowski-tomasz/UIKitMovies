@@ -5,7 +5,7 @@ final class FavoriteListViewController: UIViewController {
     private let tableView: UITableView = {
        let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FavoriteMovieTableViewCell.self, forCellReuseIdentifier: FavoriteMovieTableViewCell.description())
         return tableView
     }()
     
@@ -55,11 +55,14 @@ extension FavoriteListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteMovieTableViewCell.description(), for: indexPath) as? FavoriteMovieTableViewCell else { return UITableViewCell() }
         let model = viewModel.favoritesRelay.value[indexPath.row]
-        cell.textLabel?.text = model.title
+        cell.fill(with: model)
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.didSelectFavorite(at: indexPath.row)
+    }
 }

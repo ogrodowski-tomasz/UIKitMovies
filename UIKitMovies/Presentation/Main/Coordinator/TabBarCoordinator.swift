@@ -38,7 +38,8 @@ final class TabBarCoordinator: BaseCoordinator {
         let favoritesListNavVC = UINavigationController()
         let favoritesListCoordinator = FavoriteListCoordinator(
             favoriteRepository: favoriteRepository,
-            navigationController: favoritesListNavVC
+            navigationController: favoritesListNavVC,
+            networkManager: networkManager
         )
         store(coordinator: favoritesListCoordinator)
         favoritesListCoordinator.parentCoordinator = self

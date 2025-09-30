@@ -7,14 +7,15 @@ public class FavoriteMovieModel: Object {
     @Persisted var posterPath: String? = nil
     @Persisted var voteAverage: Double? = nil
     @Persisted var releaseDate: String? = nil
-    
+    @Persisted var dateAdded: Date
     
     public convenience init(
         id: Int,
         title: String,
         posterPath: String? = nil,
         voteAverage: Double? = nil,
-        releaseDate: String? = nil
+        releaseDate: String? = nil,
+        dateAdded: Date = Date()
     ) {
         self.init()
         self.id = id
@@ -22,5 +23,6 @@ public class FavoriteMovieModel: Object {
         self.posterPath = posterPath
         self.voteAverage = voteAverage
         self.releaseDate = releaseDate
+        self.dateAdded = dateAdded
     }
 }

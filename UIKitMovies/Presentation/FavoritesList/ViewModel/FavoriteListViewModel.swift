@@ -4,6 +4,7 @@ import RxSwift
 
 final class FavoriteListViewModel {
     
+    var onFavoriteSelected: ( (_ movie: FavoriteMovieModel) -> Void)?
     let favoritesRelay = BehaviorRelay<[FavoriteMovieModel]>(value: [])
     private let favoriteRepository: Repository.Favorite
     
@@ -12,6 +13,12 @@ final class FavoriteListViewModel {
     init(favoriteRepository: Repository.Favorite) {
         self.favoriteRepository = favoriteRepository
         observeFavorites()
+    }
+    
+    func didSelectFavorite(at index: Int) {
+        let model = favoritesRelay.value[index]
+        print("DEBUG: Selected favorite movie: \(model.title)")
+        onFavoriteSelected?(model)
     }
     
     private func observeFavorites() {
