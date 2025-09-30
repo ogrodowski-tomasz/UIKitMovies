@@ -3,11 +3,17 @@ import UIKit
 
 final class TabBarCoordinator: BaseCoordinator {
     let networkManager: MovieNetworkManagerProtocol
+    let favoriteRepository: Repository.Favorite
     
-    private var tabBarController: UITabBarController!
+    private var tabBarController: TabBarController!
     
-    init(navigationController: UINavigationController, networkManager: MovieNetworkManagerProtocol) {
+    init(
+        navigationController: UINavigationController,
+        networkManager: MovieNetworkManagerProtocol,
+        favoriteRepository: Repository.Favorite
+    ) {
         self.networkManager = networkManager
+        self.favoriteRepository = favoriteRepository
         super.init(navigationController: navigationController)
         print("DEBUG: \(String(describing: self)) init")
     }
@@ -19,14 +25,21 @@ final class TabBarCoordinator: BaseCoordinator {
     override func start() {
         let movieListNavVC = UINavigationController()
         
-        let movieListCoordinator = MovieListCoordinator(navigationController: movieListNavVC, networkManager: networkManager)
+        let movieListCoordinator = MovieListCoordinator(
+            navigationController: movieListNavVC,
+            networkManager: networkManager,
+            favoriteRepository: favoriteRepository
+        )
         store(coordinator: movieListCoordinator)
         movieListCoordinator.parentCoordinator = self
         movieListCoordinator.start()
         movieListNavVC.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "camera"), tag: 0)
         
         let favoritesListNavVC = UINavigationController()
-        let favoritesListCoordinator = FavoriteListCoordinator(navigationController: favoritesListNavVC)
+        let favoritesListCoordinator = FavoriteListCoordinator(
+            favoriteRepository: favoriteRepository,
+            navigationController: favoritesListNavVC
+        )
         store(coordinator: favoritesListCoordinator)
         favoritesListCoordinator.parentCoordinator = self
         favoritesListCoordinator.start()
@@ -34,6 +47,10 @@ final class TabBarCoordinator: BaseCoordinator {
         
         
         tabBarController = TabBarController(with: [movieListNavVC, favoritesListNavVC])
+        #if DEBUG
+        #warning("Delete this line in release")
+        tabBarController.selectedIndex = 1
+        #endif
         navigationController.pushViewController(tabBarController, animated: true)
         navigationController.isNavigationBarHidden = true
     }

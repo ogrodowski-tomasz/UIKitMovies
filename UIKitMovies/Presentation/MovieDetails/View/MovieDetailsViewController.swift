@@ -39,6 +39,16 @@ final class MovieDetailsViewController: PoppableViewController {
         return label
     }()
     
+    private let taglineLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = .systemFont(ofSize: 17, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 0
+        label.font = .italicSystemFont(ofSize: 17)
+        return label
+    }()
+    
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +61,14 @@ final class MovieDetailsViewController: PoppableViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .systemBackground
         return scrollView
+    }()
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
     }()
     
     private let viewModel: MovieDetailsViewModel
@@ -78,16 +96,20 @@ final class MovieDetailsViewController: PoppableViewController {
         print("DEBUG: \(String(describing: self)) deinit")
     }
     
-    private func setupFavoriteButton() {
-        let barButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(toggleFavorite))
+    private func setupFavoriteButton(isFavorite: Bool) {
+        let barButton = UIBarButtonItem(
+            image: isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"),
+            style: .plain,
+            target: self,
+            action: #selector(toggleFavorite)
+        )
         barButton.tintColor = .systemRed
         navigationItem.rightBarButtonItem = barButton
-
     }
     
     @objc
     private func toggleFavorite() {
-        
+        viewModel.toggleFavorite()
     }
     
     private func setupViews() {
@@ -97,10 +119,10 @@ final class MovieDetailsViewController: PoppableViewController {
         contentView.addSubview(backdropImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(originalTitleLabel)
+        contentView.addSubview(taglineLabel)
         contentView.addSubview(overviewLabel)
         
-        backdropImageView.backgroundColor = .systemRed
-        
+        view.addSubview(activityIndicator)
     }
     
     private func setupConstraints() {
@@ -125,23 +147,33 @@ final class MovieDetailsViewController: PoppableViewController {
         }
         
         originalTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.leading.equalTo(10)
+            make.trailing.equalTo(-10)
+        }
+        
+        taglineLabel.snp.makeConstraints { make in
+            make.top.equalTo(originalTitleLabel.snp.bottom).offset(10)
             make.leading.equalTo(10)
             make.trailing.equalTo(-10)
         }
         
         overviewLabel.snp.makeConstraints { make in
-            make.top.equalTo(originalTitleLabel.snp.bottom).offset(10)
+            make.top.equalTo(taglineLabel.snp.bottom).offset(10)
             make.leading.equalTo(10)
             make.trailing.equalTo(-10)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     
     private func setupObservables() {
         viewModel.movieDetailsObservable
             .subscribe(onNext: { [weak self] model in
+                self?.activityIndicator.stopAnimating()
                 self?.fill(with: model)
-                self?.setupFavoriteButton()
             })
             .disposed(by: viewModel.disposeBag)
         
@@ -151,14 +183,21 @@ final class MovieDetailsViewController: PoppableViewController {
             }
             .bind(to: navigationItem.rx.title)
             .disposed(by: viewModel.disposeBag)
+        
+        viewModel.isFavoriteObservable
+            .subscribe(onNext: { [weak self] isFavorite in
+                self?.setupFavoriteButton(isFavorite: isFavorite)
+            })
+            .disposed(by: viewModel.disposeBag)
     }
     
     private func fill(with model: MovieDetailsApiModel) {
         let url = URL(imagePath: model.backdropPath)
-        print("DEBUG: url: \(url)")
         backdropImageView.kf.setImage(with: url)
         titleLabel.text = model.title
         originalTitleLabel.text = model.originalTitle
         overviewLabel.text = model.overview
+        taglineLabel.text = "\"\(model.tagline ?? "")\""
+        taglineLabel.isHidden = (model.tagline == nil)
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240223572E8BCF5F0069ED9C /* RealmPersistenceModule in Frameworks */ = {isa = PBXBuildFile; productRef = 240223562E8BCF5F0069ED9C /* RealmPersistenceModule */; };
 		241209EE2E8A8110001CA7A1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 241209ED2E8A8110001CA7A1 /* RxCocoa */; };
 		241209F02E8A8110001CA7A1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 241209EF2E8A8110001CA7A1 /* RxRelay */; };
 		241209F22E8A8110001CA7A1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 241209F12E8A8110001CA7A1 /* RxSwift */; };
@@ -16,7 +17,21 @@
 		241209FD2E8A8136001CA7A1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 241209FC2E8A8136001CA7A1 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		24120A5F2E8BCC4A001CA7A1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		240223542E8BCEC30069ED9C /* RealmPersistenceModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealmPersistenceModule; sourceTree = "<group>"; };
 		2412090B2E8A7FF5001CA7A1 /* UIKitMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -50,6 +65,7 @@
 				241209F22E8A8110001CA7A1 /* RxSwift in Frameworks */,
 				241209FD2E8A8136001CA7A1 /* Kingfisher in Frameworks */,
 				241209F52E8A811C001CA7A1 /* SnapKit in Frameworks */,
+				240223572E8BCF5F0069ED9C /* RealmPersistenceModule in Frameworks */,
 				241209F02E8A8110001CA7A1 /* RxRelay in Frameworks */,
 				241209F82E8A812B001CA7A1 /* Moya in Frameworks */,
 				241209EE2E8A8110001CA7A1 /* RxCocoa in Frameworks */,
@@ -59,10 +75,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		240223552E8BCF5F0069ED9C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		241209022E8A7FF5001CA7A1 = {
 			isa = PBXGroup;
 			children = (
+				240223542E8BCEC30069ED9C /* RealmPersistenceModule */,
 				2412090D2E8A7FF5001CA7A1 /* UIKitMovies */,
+				240223552E8BCF5F0069ED9C /* Frameworks */,
 				2412090C2E8A7FF5001CA7A1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,6 +110,7 @@
 				241209072E8A7FF5001CA7A1 /* Sources */,
 				241209082E8A7FF5001CA7A1 /* Frameworks */,
 				241209092E8A7FF5001CA7A1 /* Resources */,
+				24120A5F2E8BCC4A001CA7A1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -102,6 +128,7 @@
 				241209F72E8A812B001CA7A1 /* Moya */,
 				241209F92E8A812B001CA7A1 /* RxMoya */,
 				241209FC2E8A8136001CA7A1 /* Kingfisher */,
+				240223562E8BCF5F0069ED9C /* RealmPersistenceModule */,
 			);
 			productName = UIKitMovies;
 			productReference = 2412090B2E8A7FF5001CA7A1 /* UIKitMovies.app */;
@@ -181,6 +208,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -207,6 +235,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -398,6 +427,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		240223562E8BCF5F0069ED9C /* RealmPersistenceModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealmPersistenceModule;
+		};
 		241209ED2E8A8110001CA7A1 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 241209EC2E8A8110001CA7A1 /* XCRemoteSwiftPackageReference "RxSwift" */;

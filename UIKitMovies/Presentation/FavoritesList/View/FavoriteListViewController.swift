@@ -2,12 +2,11 @@ import UIKit
 
 final class FavoriteListViewController: UIViewController {
     
-    private let label: UILabel = {
-       let label = UILabel()
-        label.text = "Favorites\nImplement realm/coreData storage"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
+    private let tableView: UITableView = {
+       let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
     }()
     
     private let viewModel: FavoriteListViewModel
@@ -30,16 +29,37 @@ final class FavoriteListViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubview(label)
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     private func setupConstraints() {
-        label.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
     private func setupObservables() {
-        
+        viewModel.favoritesRelay
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: viewModel.disposeBag)
     }
+}
+
+extension FavoriteListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.favoritesRelay.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let model = viewModel.favoritesRelay.value[indexPath.row]
+        cell.textLabel?.text = model.title
+        return cell
+    }
+    
+    
 }
