@@ -14,8 +14,8 @@ protocol MovieNetworkManagerProtocol {
 
 final class MovieNetworkManager: MovieNetworkManagerProtocol {
     
-    let provider = StubMovieMoyaProvider<MovieEndpoint>(seconds: 1)
-//    let provider = MovieMoyaProvider<MovieEndpoint>()
+//    let provider = StubMovieMoyaProvider<MovieEndpoint>(seconds: 1)
+    let provider = MovieMoyaProvider<MovieEndpoint>()
 
     
     let decoder: JSONDecoder = {

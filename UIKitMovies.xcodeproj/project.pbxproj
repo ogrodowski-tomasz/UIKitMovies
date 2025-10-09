@@ -15,6 +15,8 @@
 		241209F82E8A812B001CA7A1 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 241209F72E8A812B001CA7A1 /* Moya */; };
 		241209FA2E8A812B001CA7A1 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 241209F92E8A812B001CA7A1 /* RxMoya */; };
 		241209FD2E8A8136001CA7A1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 241209FC2E8A8136001CA7A1 /* Kingfisher */; };
+		24DF5BC02E97A9400072F5D4 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 24DF5BBF2E97A9400072F5D4 /* Swinject */; };
+		24DF5BC62E97B2EE0072F5D4 /* ArkanaKeys in Frameworks */ = {isa = PBXBuildFile; productRef = 24DF5BC52E97B2EE0072F5D4 /* ArkanaKeys */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,11 +63,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24DF5BC62E97B2EE0072F5D4 /* ArkanaKeys in Frameworks */,
 				241209FA2E8A812B001CA7A1 /* RxMoya in Frameworks */,
 				241209F22E8A8110001CA7A1 /* RxSwift in Frameworks */,
 				241209FD2E8A8136001CA7A1 /* Kingfisher in Frameworks */,
 				241209F52E8A811C001CA7A1 /* SnapKit in Frameworks */,
 				240223572E8BCF5F0069ED9C /* RealmPersistenceModule in Frameworks */,
+				24DF5BC02E97A9400072F5D4 /* Swinject in Frameworks */,
 				241209F02E8A8110001CA7A1 /* RxRelay in Frameworks */,
 				241209F82E8A812B001CA7A1 /* Moya in Frameworks */,
 				241209EE2E8A8110001CA7A1 /* RxCocoa in Frameworks */,
@@ -129,6 +133,8 @@
 				241209F92E8A812B001CA7A1 /* RxMoya */,
 				241209FC2E8A8136001CA7A1 /* Kingfisher */,
 				240223562E8BCF5F0069ED9C /* RealmPersistenceModule */,
+				24DF5BBF2E97A9400072F5D4 /* Swinject */,
+				24DF5BC52E97B2EE0072F5D4 /* ArkanaKeys */,
 			);
 			productName = UIKitMovies;
 			productReference = 2412090B2E8A7FF5001CA7A1 /* UIKitMovies.app */;
@@ -163,6 +169,8 @@
 				241209F32E8A811C001CA7A1 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				241209F62E8A812B001CA7A1 /* XCRemoteSwiftPackageReference "Moya" */,
 				241209FB2E8A8136001CA7A1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				24DF5BBE2E97A9400072F5D4 /* XCRemoteSwiftPackageReference "Swinject" */,
+				24DF5BC42E97B2EE0072F5D4 /* XCLocalSwiftPackageReference "ArkanaKeys/ArkanaKeys" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2412090C2E8A7FF5001CA7A1 /* Products */;
@@ -391,6 +399,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		24DF5BC42E97B2EE0072F5D4 /* XCLocalSwiftPackageReference "ArkanaKeys/ArkanaKeys" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ArkanaKeys/ArkanaKeys;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		241209EC2E8A8110001CA7A1 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -422,6 +437,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.5.0;
+			};
+		};
+		24DF5BBE2E97A9400072F5D4 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -465,6 +488,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 241209FB2E8A8136001CA7A1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		24DF5BBF2E97A9400072F5D4 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24DF5BBE2E97A9400072F5D4 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		24DF5BC52E97B2EE0072F5D4 /* ArkanaKeys */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ArkanaKeys;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

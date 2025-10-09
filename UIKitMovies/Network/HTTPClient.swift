@@ -1,3 +1,4 @@
+import ArkanaKeys
 import Foundation
 
 enum NetworkError: Error {
@@ -69,7 +70,10 @@ struct HTTPClient: HTTPClientProtocol {
 
     init() {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = ["Content-Type": "application/json", "Authorization": "Bearer \(AppKey.apiKey)"]
+        configuration.httpAdditionalHeaders = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(Keys.Global().appKey)"
+        ]
         self.session = URLSession(configuration: configuration)
     }
 
