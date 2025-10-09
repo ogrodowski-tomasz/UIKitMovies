@@ -1,3 +1,4 @@
+import ArkanaKeys
 import Foundation
 import Moya
 
@@ -6,7 +7,7 @@ final class AuthPlugin: PluginType {
     func prepare(_ request: URLRequest, target: any TargetType) -> URLRequest {
         var request = request
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Bearer \(AppKey.apiKey)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(Keys.Global().appKey)", forHTTPHeaderField: "Authorization")
         print("DEBUG: Making request: \(request.url?.absoluteString ?? "missing!")")
         return request
     }

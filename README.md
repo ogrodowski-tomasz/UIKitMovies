@@ -53,6 +53,42 @@ The application follows the **MVVM-C (Model-View-ViewModel-Coordinator)** archit
 - **Responsive UI**: Adaptive layouts for different screen sizes
 - **Image Loading**: Optimized image loading with caching
 
+## 🚀 Quick start
+
+As this project uses the TMDB Api, you need to get your own API keys to run the project. You can
+get them by following these steps:
+
+1. Go to the [tmdb](https://developer.themoviedb.org/docs/getting-started) and create an account.
+2. Once you have an account, get your App Key.
+3. Create a file called `.env` in the root directory of the project and add the following lines to
+   it:
+
+    ```shell
+    AppKey=paste_your_key_here
+    ```
+
+4. Install the [Arkana](https://github.com/rogerluan/arkana) gem by running the following command in your terminal:
+
+    ```shell
+    bundle install
+    ```
+
+    > You must have ruby and bundler installed on your machine to run the above command. If you don't have them, you can install them by following the instructions [here for Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [here for Bundler](https://bundler.io/).
+
+5. Run the following command to generate the [ArkanaKeys](https://github.com/rogerluan/arkana) local
+   package that will be used to securely
+   fetch your keys in runtime:
+
+    ```shell
+    arkana
+    ```
+
+6. After generating the ArkanaKeys package, you will need to add it to the project. To do this:
+    - open the `UIKitMovies.xcodeproj` file in Xcode, then go to `File > Add Package Dependencies > Add Local...` and select the `ArkanaKeys/ArkanaKeys` folder that was generated in the root directory of the project.
+    - Make sure to add `UIKitMovies` to the target.
+
+7. Now you can run the project in Xcode.
+
 ## 🏛️ Project Structure
 
 ```
